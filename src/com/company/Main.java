@@ -2,12 +2,8 @@ package com.company;
 
 import com.company.data.PostgresDB;
 import com.company.data.interfaces.IDB;
-import com.company.repositories.LocomotiveRepo;
-import com.company.repositories.TrainRepo;
-import com.company.repositories.UserRepository;
-import com.company.repositories.interfaces.ILocomotiveRepo;
-import com.company.repositories.interfaces.ITrainRepo;
-import com.company.repositories.interfaces.IUserRepository;
+import com.company.repositories.*;
+import com.company.repositories.interfaces.*;
 
 public class Main {
 
@@ -52,9 +48,9 @@ public class Main {
         IDB db = new PostgresDB();
 //        IUserRepository repo = new UserRepository(db);
 //        MyApplication app = new MyApplication(repo);
-        ITrainRepo trainRepo = new TrainRepo(db);
-        ILocomotiveRepo locomotiveRepo = new LocomotiveRepo(db);
-        TrainFrontEnd app = new TrainFrontEnd(trainRepo, locomotiveRepo);
+        IProjectRepo projectRepo = new ProjectRepo(db);
+        IDeveloperRepo developerRepo = new DeveloperRepo(db);
+        ProjectFrontEnd app = new ProjectFrontEnd(projectRepo, developerRepo);
         app.start();
     }
 }
