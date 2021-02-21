@@ -19,12 +19,15 @@ public class ProjectRepo implements IProjectRepo {
         this.db = db;
     }
 
+    /**
+     * overriding of each interface
+     */
     @Override
-    public boolean createProject(Project project) {
+    public boolean createProject(Project project) { //creating project
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "INSERT INTO projects(name) VALUES (?)";
+            String sql = "INSERT INTO projects(name) VALUES (?)"; //sql statement of inserting the data for project table
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setString(1, project.getName());
@@ -45,13 +48,14 @@ public class ProjectRepo implements IProjectRepo {
         return false;
     }
 
+
     @Override
-    public int getTotalCostOfProject() {
+    public int getTotalCostOfProject() { //getting total cost of projects
         updateTotalCostOfProject();
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT SUM(salary) FROM developers";
+            String sql = "SELECT SUM(salary) FROM developers"; //output of total cost of project(sum of all salary of developers)
             PreparedStatement st = con.prepareStatement(sql);
 
 
@@ -77,11 +81,11 @@ public class ProjectRepo implements IProjectRepo {
     }
 
     @Override
-    public boolean updateTotalCostOfProject() {
+    public boolean updateTotalCostOfProject() { //update total cost in projects table
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "update projects set totalcost=(SELECT SUM(salary) FROM developers) where id=1";
+            String sql = "update projects set totalcost=(SELECT SUM(salary) FROM developers) where id=1"; //updating the total cost in projects table
             PreparedStatement st = con.prepareStatement(sql);
 
 
@@ -102,11 +106,11 @@ public class ProjectRepo implements IProjectRepo {
     }
 
     @Override
-    public Project getProjectById(int id) {
+    public Project getProjectById(int id) { //getting project by id
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,name,totalCost FROM projects WHERE id=?";
+            String sql = "SELECT id,name,totalCost FROM projects WHERE id=?"; //sql statement for output data by id
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setInt(1, id);
@@ -134,11 +138,11 @@ public class ProjectRepo implements IProjectRepo {
     }
 
     @Override
-    public List<Project> getAllProjects() {
+    public List<Project> getAllProjects() { //getting all projects
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,name,totalCost FROM projects";
+            String sql = "SELECT id,name,totalCost FROM projects"; //sql statements for getting all projects
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);

@@ -6,6 +6,9 @@ import com.company.entities.Train;
 
 import java.util.List;
 
+/**
+ * interface of project repository
+ */
 public interface IProjectRepo {
     boolean createProject(Project project);
     Project getProjectById(int id);

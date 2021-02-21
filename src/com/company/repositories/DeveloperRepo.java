@@ -16,12 +16,15 @@ public class DeveloperRepo implements IDeveloperRepo {
         this.db = db;
     }
 
+    /**
+     *overriding of each interface
+     */
     @Override
-    public boolean createDeveloper(Developer developer) {
+    public boolean createDeveloper(Developer developer) { //creating developer
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "INSERT INTO developers(name,surname,gender,salary) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO developers(name,surname,gender,salary) VALUES (?,?,?,?)"; //inserting data to developers table
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setString(1, developer.getName());
@@ -46,11 +49,11 @@ public class DeveloperRepo implements IDeveloperRepo {
     }
 
     @Override
-    public Developer getDeveloperById(int id) {
+    public Developer getDeveloperById(int id) { //getting developer by id
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,name,surname,gender,salary FROM developers WHERE id=?";
+            String sql = "SELECT id,name,surname,gender,salary FROM developers WHERE id=?"; // outputting data from developers by id
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setInt(1, id);
@@ -80,11 +83,11 @@ public class DeveloperRepo implements IDeveloperRepo {
     }
 
     @Override
-    public List<Developer> getAllDevelopers() {
+    public List<Developer> getAllDevelopers() { //getting all developers
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,name,surname,gender,salary FROM developers";
+            String sql = "SELECT id,name,surname,gender,salary FROM developers"; //outputting all developers
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);

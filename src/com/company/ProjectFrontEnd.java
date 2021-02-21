@@ -18,6 +18,9 @@ public class ProjectFrontEnd {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * console of this project
+     */
     public void start() {
         while (true) {
             System.out.println();
