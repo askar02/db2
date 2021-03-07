@@ -1,55 +1,58 @@
 package com.company.entities;
 
 public class Stone {
-    private int id;//variable
-    private String name;//variable
-    private double weight;//variable
-    private int cost;//variable
+    private int id;
+    private String name;
+    private double weight;
+    private int cost;//variables
 
-    public Stone(){}//method
-    public Stone(String name, double weight, int cost){//method
-        setName(name);
-        setCost(cost);
+    public Stone(){
 
     }
+
+    public Stone(String name, double weight, int cost){
+        setName(name);
+        setCost(cost);
+    }
+
     public Stone(int id, String name, double weight, int cost){//method
         setId(id);
         setName(name);
         setCost(cost);
-
     }
-    // getter and setters
+
     public int getId() {
         return id;
-    }
+    } //getter of id
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
+    } //setter of id
 
     public double getWeight() {
         return weight;
-    }
+    } //getter of weight
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
+    public void setWeight(double weight) {
+        this.weight = weight;
+    } //setter of weight
 
     public int getCost() {
         return cost;
-    }
+    } //getter of cost
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    } //setter of cost
 
     public String getName() {
         return name;
-    }
+    } //getter of name
 
     public void setName(String name) {
         this.name = name;
-    }
+    } //setter of name
+
     //override for toString
     @Override
     public String toString(){

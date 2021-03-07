@@ -6,15 +6,15 @@ import java.util.Scanner;
 
 
 public class NecklaceFrontEnd {
-    private final NecklaceController controller1;
-    private final StoneController controller2;
-    private final ConnectorController controller3;
+    private final NecklaceController control1;
+    private final StoneController control2;
+    private final ConnectorController control3;
     private final Scanner scanner;
 
     public NecklaceFrontEnd(INecklaceRepo orderRepo, IStoneRepo medicamentRepo, IConnectorRepo bindRepo) {
-        controller1 = new NecklaceController(orderRepo,medicamentRepo);
-        controller2 = new StoneController(medicamentRepo);
-        controller3 = new ConnectorController(bindRepo);
+        control1 = new NecklaceController(orderRepo,medicamentRepo);
+        control2 = new StoneController(medicamentRepo);
+        control3 = new ConnectorController(bindRepo);
         scanner = new Scanner(System.in);
     }
 
@@ -71,27 +71,27 @@ public class NecklaceFrontEnd {
         int id1 = scanner.nextInt();
         System.out.println("Please enter stone_id!");
         int id2 = scanner.nextInt();
-        String response = controller3.enterStoneToNecklace(id1,id2);
+        String response = control3.enterStoneToNecklace(id1,id2);
         System.out.println(response);
     }
 
 
     public void getAllNecklaces() {
-        String response = controller1.getAllNecklaces();
+        String response = control1.getAllNecklaces();
         System.out.println(response);
     }
 
     public void getNecklace() {
         System.out.println("Now you should enter needing necklace's id.");
         int id = scanner.nextInt();
-        String response = controller1.getNecklace(id);
+        String response = control1.getNecklace(id);
         System.out.println(response);
     }
 
     public void getStonesByNecklace() {
         System.out.println("Please, enter id of needing necklace's stones!");
         int id = scanner.nextInt();
-        String response = controller1.getStonesByNecklace(id);
+        String response = control1.getStonesByNecklace(id);
         System.out.println(response);
     }
 
@@ -100,20 +100,20 @@ public class NecklaceFrontEnd {
         String name = scanner.next();
         int cost=0;
         int weight=0;
-        String response = controller1.createNecklace(name,weight,cost);
+        String response = control1.createNecklace(name,weight,cost);
         System.out.println(response);
     }
 
 
     public void getAllStones() {
-        String response = controller2.getAllStones();
+        String response = control2.getAllStones();
         System.out.println(response);
     }
 
     public void getStone() {
         System.out.println("Now you should enter needing stone's id.");
         int id = scanner.nextInt();
-        String response = controller2.getStone(id);
+        String response = control2.getStone(id);
         System.out.println(response);
     }
 
@@ -125,7 +125,7 @@ public class NecklaceFrontEnd {
         System.out.println("Please, enter stone cost!");
         int cost = scanner.nextInt();
 
-        String response = controller2.createStone(name,weight,cost);
+        String response = control2.createStone(name,weight,cost);
         System.out.println(response);
     }
 
