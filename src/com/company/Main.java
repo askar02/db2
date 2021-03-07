@@ -48,9 +48,10 @@ public class Main {
         IDB db = new PostgresDB();
 //        IUserRepository repo = new UserRepository(db);
 //        MyApplication app = new MyApplication(repo);
-        IProjectRepo projectRepo = new ProjectRepo(db);
-        IDeveloperRepo developerRepo = new DeveloperRepo(db);
-        ProjectFrontEnd app = new ProjectFrontEnd(projectRepo, developerRepo);
+        INecklaceRepo necklaceRepo = new NecklaceRepo(db);
+        IStoneRepo stoneRepo = new StoneRepo(db);
+        IConnectorRepo connectorRepo = new ConnectorRepo(db);
+        NecklaceFrontEnd app = new NecklaceFrontEnd(necklaceRepo, stoneRepo, connectorRepo);
         app.start();
     }
 }

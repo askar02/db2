@@ -1,32 +1,31 @@
 package com.company.repositories;
 
 import com.company.data.interfaces.IDB;
-import com.company.entities.User;
-import com.company.repositories.interfaces.IUserRepository;
+import com.company.entities.Stone;
+import com.company.repositories.interfaces.IStoneRepo;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-public class UserRepository implements IUserRepository {
+public class StoneRepo implements IStoneRepo {
     private final IDB db;
-
-    public UserRepository(IDB db) {
+    public StoneRepo(IDB db) {
         this.db = db;
-    }
+    } //link with database
 
     @Override
-    public boolean createUser(User user) {
-        Connection con = null;
-        try {
+    public boolean createStone(Stone stone) {
+        Connection con = null;//object
+        try {//checking for troubles
             con = db.getConnection();
-            String sql = "INSERT INTO users(name,surname,gender) VALUES (?,?,?)";
+            String sql = "INSERT INTO stone(name,weight,cost) VALUES (?,?,?)"; //insert data to database
             PreparedStatement st = con.prepareStatement(sql);
+            //input
+            st.setString(1, stone.getName());
+            st.setDouble(2, stone.getWeight());
+            st.setInt(3, stone.getCost());
 
-            st.setString(1, user.getName());
-            st.setString(2, user.getSurname());
-            st.setBoolean(3, user.getGender());
 
             boolean executed = st.execute();
             return executed;
@@ -45,23 +44,26 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User getUser(int id) {
+    public Stone getStoneById(int id) {
         Connection con = null;
-        try {
+        try {//checking for troubles
             con = db.getConnection();
-            String sql = "SELECT id,name,surname,gender FROM users WHERE id=?";
+            String sql = "SELECT  id,name,weight,cost FROM stone WHERE id=?";//select data from database
             PreparedStatement st = con.prepareStatement(sql);
-
+            //input
             st.setInt(1, id);
 
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                User user = new User(rs.getInt("id"),
+                //output
+                Stone stone = new Stone(rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getBoolean("gender"));
+                        rs.getDouble("weight"),
+                        rs.getInt("cost")
 
-                return user;
+                );
+
+                return stone;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -78,25 +80,28 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<Stone> getAllStones() {
         Connection con = null;
-        try {
+        try {//checking for troubles
             con = db.getConnection();
-            String sql = "SELECT id,name,surname,gender FROM users";
+            String sql = "SELECT id,name,weight,cost FROM stone"; //select data from database
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
-            List<User> users = new ArrayList<>();
+            List<Stone> stoneList = new ArrayList<>();
             while (rs.next()) {
-                User user = new User(rs.getInt("id"),
+                //output
+                Stone stone = new Stone(rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getBoolean("gender"));
+                        rs.getDouble("weight"),
+                        rs.getInt("cost")
 
-                users.add(user);
+                );
+
+                stoneList.add(stone);
             }
 
-            return users;
+            return stoneList;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
